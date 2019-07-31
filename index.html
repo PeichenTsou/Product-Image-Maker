@@ -1,118 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" >
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>PHOTOs</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Baloo+Bhai'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/cwtexyen.css?family=1c:800'>
+    <link rel='stylesheet' href='https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/notosanstc.css'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>PHOTOs</title>
-  
-  
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Baloo+Bhai'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/cwtexyen.css?family=1c:800'>
-<link rel='stylesheet' href='https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/notosanstc.css'>
-
-      <link rel="stylesheet" href="css/style.css">
-
-  
-</head>
-
-<body>
-
-  <!doctype html>
-<html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js "></script>
-<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js "></script>
-<script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-<head
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>MAKE PHOTOs</title>
-</head>
   <body>
     <h1>PHOTOs</h1>
-    <h5><span class="highlight">《直接拍照》</span>1. Culculate > 2. Take a Photo > 3. Change to PIC (可重複輸出)</h5>
-    <h5><span class="highlight">《上傳照片》</span>1. Choose File > 3. Change to PIC </h5>
-    <h5>((以上兩個功能可同時使用))</h5>
 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+    <!-- Introduction -->
+    <h5><span class="highlight">《By taking pictures》</span>1. Take a Photo > 3. Change to PIC</h5>
+    <h5><span class="highlight">《By uploading pictures》</span>1. Choose File > 3. Change to PIC </h5>
+    <p>(Can be used at the same time)</p>
+
+    <!-- Camera for taking photos -->
     <div id="my_camera"></div>
-      <p>DUE DATE:　<input type="text" id="datepicker" size="30"></p>
-      <p>DUE TIME:　<input type="text" v-model="dueTime" size="30" ></p>
 
-    <div id=app> 
-      <div class=inputData>
-        <table>
-          <tr><td>NAME</td><td><input v-model="productName"></td></tr>
-          <tr><td>PRICE (original)</td><td><input v-model="originalPrice"></td></tr>
-          <tr><td>RATE (=?$NT)</td><td><input v-model="rate"></td></tr>
-          <tr><td>WEIGHT (KG)</td><td><input v-model="weight"></td></tr>
-          <tr><td>ADJUSTMENT</td><td><input v-model="adjust"></td><td><button type="button" class ="culcu_btn">Culculate!</button></td></tr>
-  <!--       <tr><td>TYPE</td><td><select id="sfs" name="sfsname">
-                                <option value="1">玩具類(200g)</option>
-                                <option value="2">藥妝類(500g)</option>
-                                <option value="3">電器類(1kg)</option>
-                             </select></td></tr> -->
-        </table>
-      </div>
+    <!-- input Data -->
+    <table>
+      <tr><td>DUE DATE</td><td><input type="text" id="datepicker" size="30" class="form-control"></td></tr>
+      <tr><td>DUE TIME</td><td><input type="text" v-model="dueTime" size="30" class="form-control"></td></tr>
+    </table>
+
+    <br>
+
+    <table>
+      <tr><td>NAME</td><td><input v-model="productName" class="form-control"></td></tr>
+      <tr><td>PRICE (original)</td><td><input v-model="originalPrice" class="form-control"></td></tr>
+      <tr><td>RATE (=?$NT)</td><td><input v-model="rate" class="form-control"></td></tr>
+      <tr><td>WEIGHT (KG)</td><td><input v-model="weight" class="form-control"></td></tr>
+      <tr><td>ADJUSTMENT</td><td><input v-model="adjust" class="form-control"></td></tr>
+    </table>
+
     <!-- A button for taking snaps -->
-      <form>
-        <input type=button value="Take a Photo" onClick="take_snapshot()" id="clicktake">
-  <!-- 	  <input type="button" id="reset" value="Reset" /> -->
-        <input type="button" id="changeToPic" value="Change to PIC" />
-  <!--     <a href="#" download="dl.png" class="downloadMany" >downloadMany</a> -->
-        <input type="button" id="downloadMany2" value="downloadMany2" />
-      </form>
+    <form>
+      <input type="button" value="Take a Photo" onClick="take_snapshot()" class ="culcu_btn btn btn-outline-secondary btn-sm">
+      <input type="button" id="changeToPic" value="Change to PIC" class="btn btn-outline-secondary btn-sm">
+    </form>
 
-      <div class="iWantCapture" id="app">
-  <!--     <div class="waterimg"><img src="https://i.imgur.com/P8yDAYL.png" width="150px"></div> -->
-        <div class="waterimg">浮水印字樣</div>
-        <div id="results" class="scrshot">Photo HERE...</div>
+    <!-- Area to capture -->
+    <div class="iWantCapture">
+      <div class="waterimg">Watermarks</div>
+      <div id="results" class="scrshot">Photo HERE...</div>
             <table>
               <tr><td>{{productName}}</td></tr>
               <tr><td><div class="priceDiv"></div></td></tr>
-              <tr><td>【收單時間{{dueDate}}, {{dueTime}}】</td></tr>
-      <!--     <tr><td><div id="dueDate"></div></td></tr> -->
-      <!--     <tr><td>{{priceAfterCalc}}<tr><td> -->
-      <!--     <tr><td>{{originalPrice}}<tr><td> -->
+              <tr><td>【Due date: {{dueDate}}, {{dueTime}}】</td></tr>
             </table>
-      </div>
-   </div>
-  <!--     <div class="changedPic">
-      <fieldset>
-        <legend>OUTPUT</legend>
-        <div class="outputPic"></div>
-      </fieldset>
-      </div> -->
     </div>
 
+    <!-- Upload Picture Function  -->
     <form action="/somewhere/to/upload" enctype="multipart/form-data">
        <input type="file" id="progressbarTWInput" accept="image/gif, image/jpeg, image/png" multiple/ >
        <div id="preview_progressbarTW_imgs" style="width:100%; height: 100%; overflow:scroll;">
-           <p>目前沒有圖片</p>
+           <p>There is no picture now..</p>
        </div>
     </form>
+            </div>
+            <div class="col">
 
+    <!-- A area for showing Pic to download-->
     <div class="changedPic">
       <fieldset>
         <legend>OUTPUT</legend>
         <div class="outputPic"></div>
       </fieldset>
     </div>
-<!-- <canvas id="canvas" ></canvas> -->
-<!-- <a href="#" download="dl.png" onclick="this.href=canvas.toDataURL();" >下載</a> -->
+
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js "></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js "></script>
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js'></script>
+    <script src='https://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js'></script>
+    <script src='https://code.jquery.com/jquery-1.9.1.js'></script>
+    <script src='https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
+    <script src="js/index.js"></script>
+
   </body>
-</html>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js'></script>
-<script src='https://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js'></script>
-<script src='https://code.jquery.com/jquery-1.9.1.js'></script>
-<script src='https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
-
-  
-
-    <script  src="js/index.js"></script>
-
-
-
-
-</body>
-
 </html>
