@@ -18,78 +18,78 @@
         <div class="row">
             <div class="col">
 
-    <!-- Introduction -->
-    <h5><span class="highlight">《By taking pictures》</span>1. Take a Photo > 3. Change to PIC</h5>
-    <h5><span class="highlight">《By uploading pictures》</span>1. Choose File > 3. Change to PIC </h5>
-    <p>(Can be used at the same time)</p>
+                <!-- Introduction -->
+                <h5><span class="highlight">《By taking pictures》</span>1. Take a Photo > 3. Change to PIC</h5>
+                <h5><span class="highlight">《By uploading pictures》</span>1. Choose File > 3. Change to PIC </h5>
+                <p>(Can be used at the same time)</p>
 
-    <!-- Camera for taking photos -->
-    <div id="my_camera"></div>
+                <!-- Camera for taking photos -->
+                <div id="my_camera"></div>
 
-    <!-- input Data -->
-    <table>
-      <tr><td>DUE DATE</td><td><input type="text" id="datepicker" size="30" class="form-control"></td></tr>
-      <tr><td>DUE TIME</td><td><input type="text" v-model="dueTime" size="30" class="form-control"></td></tr>
-    </table>
+                <!-- input Data -->
+                <table>
+                  <tr><td>DUE DATE</td><td><input type="text" id="datepicker" size="30" class="form-control"></td></tr>
+                  <tr><td>DUE TIME</td><td><input type="text" v-model="dueTime" size="30" class="form-control"></td></tr>
+                </table>
 
-    <br>
+                <br>
 
-    <table>
-      <tr><td>NAME</td><td><input v-model="productName" class="form-control"></td></tr>
-      <tr><td>PRICE (original)</td><td><input v-model="originalPrice" class="form-control"></td></tr>
-      <tr><td>RATE (=?$NT)</td><td><input v-model="rate" class="form-control"></td></tr>
-      <tr><td>WEIGHT (KG)</td><td><input v-model="weight" class="form-control"></td></tr>
-      <tr><td>ADJUSTMENT</td><td><input v-model="adjust" class="form-control"></td></tr>
-    </table>
+                <table>
+                  <tr><td>NAME</td><td><input v-model="productName" class="form-control"></td></tr>
+                  <tr><td>PRICE (original)</td><td><input v-model="originalPrice" class="form-control"></td></tr>
+                  <tr><td>RATE (=?$NT)</td><td><input v-model="rate" class="form-control"></td></tr>
+                  <tr><td>WEIGHT (KG)</td><td><input v-model="weight" class="form-control"></td></tr>
+                  <tr><td>ADJUSTMENT</td><td><input v-model="adjust" class="form-control"></td></tr>
+                </table>
 
-    <!-- A button for taking snaps -->
-    <form>
-      <input type="button" value="Take a Photo" onClick="take_snapshot()" class ="culcu_btn btn btn-outline-secondary btn-sm">
-      <input type="button" id="changeToPic" value="Change to PIC" class="btn btn-outline-secondary btn-sm">
-    </form>
+                <!-- A button for taking snaps -->
+                <form>
+                  <input type="button" value="Take a Photo" onClick="take_snapshot()" class ="calcu_btn btn btn-outline-secondary btn-sm">
+                </form>
 
-    <!-- Area to capture -->
-    <div class="iWantCapture">
-      <div class="waterimg">Watermarks</div>
-      <div id="results" class="scrshot">Photo HERE...</div>
-            <table>
-              <tr><td>{{productName}}</td></tr>
-              <tr><td><div class="priceDiv"></div></td></tr>
-              <tr><td>【Due date: {{dueDate}}, {{dueTime}}】</td></tr>
-            </table>
-    </div>
+                <!-- Area to capture -->
+                <div class="iWantCapture">
+                  <div class="waterimg">Watermarks</div>
+                  <div id="photo_snapshot" class="scrshot">Photo HERE...</div>
+                        <table>
+                          <tr><td>{{productName}}</td></tr>
+                          <tr><td><div class="priceDiv"></div></td></tr>
+                          <tr><td>【Due date: {{dueDate}}, {{dueTime}}】</td></tr>
+                        </table>
+                </div>
 
-    <!-- Upload Picture Function  -->
-    <form action="/somewhere/to/upload" enctype="multipart/form-data">
-       <input type="file" id="progressbarTWInput" accept="image/gif, image/jpeg, image/png" multiple/ >
-       <div id="preview_progressbarTW_imgs" style="width:100%; height: 100%; overflow:scroll;">
-           <p>There is no picture now..</p>
-       </div>
-    </form>
+                <!-- Upload Picture Function  -->
+                <form action="/somewhere/to/upload" enctype="multipart/form-data">
+                   <input type="file" id="progressbarTWInput" accept="image/gif, image/jpeg, image/png" multiple/ >
+                   <div id="preview_progressbarTW_imgs" style="width:100%; height: 100%; overflow:scroll;">
+                       <p>There is no picture now..</p>
+                   </div>
+                </form>
             </div>
-            <div class="col">
 
-    <!-- A area for showing Pic to download-->
-    <div class="changedPic">
-      <fieldset>
-        <legend>OUTPUT</legend>
-        <div class="outputPic"></div>
-      </fieldset>
-    </div>
+            <div class="col">
+                <input type="button" id="changeToPic" value="Change to PIC" class="btn btn-outline-secondary btn-sm"><br>
+                <!-- A area for showing Pic to download-->
+                <div class="changedPic">
+                  <fieldset>
+                    <legend>OUTPUT</legend>
+                    <div class="outputPic"></div>
+                  </fieldset>
+                </div>
 
             </div>
         </div>
     </div>
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js "></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js "></script>
-    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js "></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js "></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js'></script>
     <script src='https://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js'></script>
     <script src='https://code.jquery.com/jquery-1.9.1.js'></script>
     <script src='https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
-    <script src="js/index.js"></script>
+    <script src="js/index.js" ></script>
 
   </body>
 </html>
